@@ -139,7 +139,6 @@ const Advertising = () => {
       </div>
 
       <div style={styles.content}>
-        <h1>Hello</h1>
         {user && (
           <div style={styles.userContainer}>
             <div style={styles.userInfoContainer}>
