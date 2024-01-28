@@ -36,15 +36,70 @@ const MainMenu = () => {
     });
   };
 
+  const handleMenuItemClick = (menuItem) => {
+    switch (menuItem) {
+      case "Get Started":
+        window.location.href = "/";
+        break;
+      case "Mobile":
+        window.location.href = "/marketing_dashboard/#/mobile";
+        break;
+      case "About":
+        window.location.href = "/marketing_dashboard/#/about";
+        break;
+      case "Help":
+        window.location.href = "/marketing_dashboard/#/help";
+        break;
+      case "Wiki":
+        window.location.href = "/marketing_dashboard/#/wiki";
+        break;
+      case "Policy":
+        window.location.href = "/marketing_dashboard/#/policy";
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div style={styles.mainContainer}>
       <div style={styles.menuBar}>
-        <div style={styles.menuItem}>Get Started</div>
-        <div style={styles.menuItem}>Mobile</div>
-        <div style={styles.menuItem}>About</div>
-        <div style={styles.menuItem}>Help</div>
-        <div style={styles.menuItem}>Wiki</div>
-        <div style={styles.menuItem}>Policy</div>
+        <div
+          style={styles.menuItem}
+          onClick={() => handleMenuItemClick("Get Started")}
+        >
+          Get Started
+        </div>
+        <div
+          style={styles.menuItem}
+          onClick={() => handleMenuItemClick("Mobile")}
+        >
+          Mobile
+        </div>
+        <div
+          style={styles.menuItem}
+          onClick={() => handleMenuItemClick("About")}
+        >
+          About
+        </div>
+        <div
+          style={styles.menuItem}
+          onClick={() => handleMenuItemClick("Help")}
+        >
+          Help
+        </div>
+        <div
+          style={styles.menuItem}
+          onClick={() => handleMenuItemClick("Wiki")}
+        >
+          Wiki
+        </div>
+        <div
+          style={styles.menuItem}
+          onClick={() => handleMenuItemClick("Policy")}
+        >
+          Policy
+        </div>
       </div>
       <div style={styles.grayContainer}>
         <h1 style={styles.title}>Marketing Dashboard</h1>

@@ -11,6 +11,10 @@ import Feedback from './Feedback';
 import Settings from './Settings';
 import Alerts from './Alerts';
 import Admin from './Admin';
+import Mobile from './Mobile';
+import Help from './Help';
+import Policy from './Policy';
+import Wiki from './Wiki';
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/alerts" element={<Alerts />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/mobile" element={<Mobile />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/wiki" element={<Wiki />} />
       </Routes>
     </Router>
   );

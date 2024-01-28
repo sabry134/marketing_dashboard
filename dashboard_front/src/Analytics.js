@@ -1,16 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import nightBackground from "./sparkles_night.jpg";
+import { Chart } from "chart.js/auto";
 
 const Analytics = () => {
   const [user, setUser] = useState(null);
   const [hoveredItem, setHoveredItem] = useState(null);
   const navigate = useNavigate();
 
+  const chartRef = useRef(null);
+
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: "Selling History",
+        data: [],
+        borderColor: "rgba(75,192,192,1)",
+        borderWidth: 2,
+        fill: false,
+      },
+    ],
+  });
+
   useEffect(() => {
     const getTokenFromLocalStorage = () => {
       return localStorage.getItem("accessToken");
+    };
+
+    const storedKey = localStorage.getItem("generatedKey");
+    console.log("Stored key is: ", storedKey);
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://ballistic-half-jumper.glitch.me/${storedKey}`);
+        const data = response.data.data || [];
+        
+        const updatedChartData = {
+          labels: data.map(item => item.date),
+          datasets: [
+            {
+              label: "Selling History",
+              data: data.map(item => item.Sold),
+              borderColor: "rgba(75,192,192,1)",
+              borderWidth: 2,
+              fill: false,
+            },
+          ],
+        };
+
+        setChartData(updatedChartData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     const fetchUser = async () => {
@@ -22,7 +65,9 @@ const Analytics = () => {
           return;
         }
 
-        const response = await axios.get("https://ballistic-half-jumper.glitch.me/user");
+        const response = await axios.get(
+          "https://ballistic-half-jumper.glitch.me/user"
+        );
         setUser(response.data);
         document.title = "Marketing Dashboard | Analytics";
       } catch (error) {
@@ -32,7 +77,28 @@ const Analytics = () => {
     };
 
     fetchUser();
+    fetchData();
   }, [navigate]);
+
+  useEffect(() => {
+    if (chartRef.current) {
+      chartRef.current.destroy();
+    }
+
+    const newChartInstance = new Chart("chart", {
+      type: "line",
+      data: chartData,
+      options: styles.chartOptions,
+    });
+
+    chartRef.current = newChartInstance;
+
+    return () => {
+      if (chartRef.current) {
+        chartRef.current.destroy();
+      }
+    };
+  }, [chartData]);
 
   const handleMenuItemClick = (path) => {
     navigate(path);
@@ -54,7 +120,7 @@ const Analytics = () => {
   return (
     <div style={styles.container}>
       <div style={styles.menu}>
-        <ul style={styles.menuList}>
+      <ul style={styles.menuList}>
           <li
             style={hoveredItem === 0 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
             onClick={() => handleMenuItemClick("/dashboard")}
@@ -143,7 +209,11 @@ const Analytics = () => {
           <div style={styles.userContainer}>
             <div style={styles.userInfoContainer}>
               <div style={styles.userImageContainer}>
-                <img src={user.picture} alt={user.name} style={styles.userImage} />
+                <img
+                  src={user.picture}
+                  alt={user.name}
+                  style={styles.userImage}
+                />
               </div>
               <div style={styles.userInfo}>
                 <p style={styles.userName}>{user.name}</p>
@@ -154,6 +224,12 @@ const Analytics = () => {
             </div>
           </div>
         )}
+
+        <div style={styles.chartBackgroundContainer}>
+          <div style={styles.chartContainer}>
+            <canvas id="chart" />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -235,10 +311,36 @@ const styles = {
     fontSize: "16px",
     marginTop: "10px",
   },
-  percentage: {
-    color: "#fff",
-    fontSize: "24px",
-    marginTop: "10px",
+  chartBackgroundContainer: {
+    flex: 1,
+    padding: "2px",
+    backgroundColor: "#fff",
+    marginLeft: "15%",
+    marginRight: "15%",
+  },
+
+  chartContainer: {
+    flex: 1,
+    width: "80%",
+    marginLeft: "10%",
+  },
+  chartOptions: {
+    scales: {
+      x: [
+        {
+          type: "category",
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+        },
+      ],
+      y: [
+        {
+          type: "linear",
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
   },
 };
 
