@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/marketing_dashboard/static/css/main.62681827.css",
-    "main.js": "/marketing_dashboard/static/js/main.500c5273.js",
+    "main.js": "/marketing_dashboard/static/js/main.d8c3a221.js",
     "static/js/787.e94e3ee8.chunk.js": "/marketing_dashboard/static/js/787.e94e3ee8.chunk.js",
     "static/media/sparkles_night.jpg": "/marketing_dashboard/static/media/sparkles_night.e543b3003ddb4a690a91.jpg",
     "static/media/google.png": "/marketing_dashboard/static/media/google.3ac8bb5608a106bb6308.png",
     "index.html": "/marketing_dashboard/index.html",
     "main.62681827.css.map": "/marketing_dashboard/static/css/main.62681827.css.map",
-    "main.500c5273.js.map": "/marketing_dashboard/static/js/main.500c5273.js.map",
+    "main.d8c3a221.js.map": "/marketing_dashboard/static/js/main.d8c3a221.js.map",
     "787.e94e3ee8.chunk.js.map": "/marketing_dashboard/static/js/787.e94e3ee8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.62681827.css",
-    "static/js/main.500c5273.js"
+    "static/js/main.d8c3a221.js"
   ]
 }

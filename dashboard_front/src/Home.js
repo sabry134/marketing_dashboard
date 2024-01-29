@@ -39,7 +39,7 @@ const MainMenu = () => {
   const handleMenuItemClick = (menuItem) => {
     switch (menuItem) {
       case "Get Started":
-        window.location.href = "/";
+        window.location.href = "/marketing_dashboard/#/";
         break;
       case "Mobile":
         window.location.href = "/marketing_dashboard/#/mobile";

@@ -15,6 +15,7 @@ import Mobile from './Mobile';
 import Help from './Help';
 import Policy from './Policy';
 import Wiki from './Wiki';
+import Error from './Error';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/wiki" element={<Wiki />} />
+        <Route path="/error" element={<Error />} />
       </Routes>
     </Router>
   );

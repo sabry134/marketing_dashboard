@@ -8,6 +8,7 @@ const Settings = () => {
   const [hoveredItem, setHoveredItem] = useState(null);
   const [generatedKey, setGeneratedKey] = useState(null);
   const [showKey, setShowKey] = useState(false);
+  const [validKey, setValidKey] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,8 +36,25 @@ const Settings = () => {
       }
     };
 
+    const checkKeyValidity = async () => {
+      try {
+        const response = await axios.get(
+          "https://ballistic-half-jumper.glitch.me/get-keys"
+        );
+        const keys = response.data.keys;
+
+        if (generatedKey && !keys.includes(generatedKey)) {
+          // Key is not valid, set validKey to false
+          setValidKey(false);
+        }
+      } catch (error) {
+        console.error("Error checking key validity:", error);
+      }
+    };
+
     fetchUser();
-  }, [navigate]);
+    checkKeyValidity();
+  }, [navigate, generatedKey]);
 
   const handleShowKey = () => {
     setShowKey(!showKey);
@@ -226,11 +244,15 @@ const Settings = () => {
           </div>
         )}
         <div style={styles.generateKeyContainer}>
+          {!validKey && (
+            <div style={styles.errorContainer}>
+              It looks like your key has been revoked. Please generate a new one.
+            </div>
+          )}
           <div style={styles.generateKeyTitle}>Generate Analytics Key</div>
           <p>Generating analytics keys allow you to add your personal data <br></br>regarding selling history. It will thus create a graphic on<br></br> Analytics page.</p>
           {generatedKey && (
-            <div style={styles.generatedKeyContainer}>
-              {/* Replace <p> with <input> */}
+            <div>
               <input
                 type={showKey ? "text" : "password"}
                 value={generatedKey}
@@ -340,7 +362,7 @@ const styles = {
   generateKeyButtonContainer: {
     position: "absolute",
     top: "70%",
-    left: "32%",
+    left: "35%",
   },
   generateKeyButton: {
     backgroundColor: "#3498db",
@@ -355,7 +377,7 @@ const styles = {
   },
   generateKeyContainer: {
     position: "absolute",
-    left: "34%",
+    left: "35%",
     backgroundColor: "#ccc",
     padding: "200px",
     borderRadius: "10px",
@@ -363,7 +385,7 @@ const styles = {
   },
   generatedKeyText: {
     color: "black",
-    marginRight: "10px",
+    marginLeft: "10%",
     padding: "10px",
     fontSize: "18px",
     borderRadius: "8px",
@@ -386,6 +408,14 @@ const styles = {
     color: "#333",
     fontSize: "24px",
     marginBottom: "20px",
+  },
+  errorContainer: {
+    backgroundColor: "red",
+    color: "white",
+    padding: "10px",
+    borderRadius: "8px",
+    marginBottom: "10px",
+    marginRight: "5%",
   },
 };
 
