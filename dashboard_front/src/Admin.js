@@ -6,6 +6,7 @@ import nightBackground from "./sparkles_night.jpg";
 const Admin = () => {
   const [user, setUser] = useState(null);
   const [hoveredItem, setHoveredItem] = useState(null);
+  const [keyList, setKeyList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,11 +23,15 @@ const Admin = () => {
           return;
         }
 
-        const response = await axios.get("https://ballistic-half-jumper.glitch.me/user");
-        setUser(response.data);
+        const userResponse = await axios.get("https://ballistic-half-jumper.glitch.me/user");
+        setUser(userResponse.data);
+
+        const keysResponse = await axios.get("https://ballistic-half-jumper.glitch.me/get-keys");
+        setKeyList(keysResponse.data.keys);
+
         document.title = "Marketing Dashboard | Admin";
       } catch (error) {
-        console.error("Error fetching user information:", error);
+        console.error("Error fetching data:", error);
         navigate("/error");
       }
     };
@@ -139,6 +144,16 @@ const Admin = () => {
       </div>
 
       <div style={styles.content}>
+      <div style={styles.keyListContainer}>
+          <p style={styles.keyListTitle}>Key list</p>
+          <ul style={styles.keyList}>
+            {keyList.map((key, index) => (
+              <li key={index} style={styles.keyListItem}>
+                {key}
+              </li>
+            ))}
+          </ul>
+        </div>
         {user && (
           <div style={styles.userContainer}>
             <div style={styles.userInfoContainer}>
@@ -239,6 +254,31 @@ const styles = {
     color: "#fff",
     fontSize: "24px",
     marginTop: "10px",
+  },
+  keyListContainer: {
+    backgroundColor: "#fff",
+    padding: "20px",
+    width: "200px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    marginBottom: "20px",
+    marginRight: "20px",
+  },
+  keyListTitle: {
+    fontSize: "18px",
+    marginBottom: "10px",
+  },
+  keyList: {
+    listStyle: "none",
+    padding: 0,
+    margin: 0,
+    marginLeft: "10%",
+    textDecoration: "underline",
+    fontWeight: "bold",
+  },
+  keyListItem: {
+    fontSize: "14px",
+    marginBottom: "5px",
   },
 };
 

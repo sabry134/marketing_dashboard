@@ -10,12 +10,13 @@ import Competitor from './Competitor';
 import Feedback from './Feedback';
 import Settings from './Settings';
 import Alerts from './Alerts';
-import Admin from './Admin';
 import Mobile from './Mobile';
 import Help from './Help';
 import Policy from './Policy';
 import Wiki from './Wiki';
 import Error from './Error';
+import LoginAdmin from './LoginAdmin';
+import Admin from './Admin';
 
 function App() {
   return (
@@ -31,12 +32,13 @@ function App() {
         <Route path="/customer-feedback" element={<Feedback />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/alerts" element={<Alerts />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<LoginAdmin />} />
         <Route path="/mobile" element={<Mobile />} />
         <Route path="/help" element={<Help />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/wiki" element={<Wiki />} />
         <Route path="/error" element={<Error />} />
+        <Route path="/management" element={<Admin />} />
       </Routes>
     </Router>
   );

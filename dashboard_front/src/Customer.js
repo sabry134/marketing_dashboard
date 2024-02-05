@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import nightBackground from "./sparkles_night.jpg";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
 const Customer = () => {
   const [user, setUser] = useState(null);
@@ -22,7 +24,9 @@ const Customer = () => {
           return;
         }
 
-        const response = await axios.get("https://ballistic-half-jumper.glitch.me/user");
+        const response = await axios.get(
+          "https://ballistic-half-jumper.glitch.me/user"
+        );
         setUser(response.data);
         document.title = "Marketing Dashboard | Customer";
       } catch (error) {
@@ -51,12 +55,42 @@ const Customer = () => {
     navigate("/");
   };
 
+  useEffect(() => {
+    const map = L.map("map", {
+      minZoom: 2,
+    }).setView([0, 0], 2);
+  
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors",
+    }).addTo(map);
+  
+    const markerIcon = new L.Icon({
+      iconUrl:
+        "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    });
+  
+    L.marker([48.8566, 2.3522], { icon: markerIcon }).addTo(map);
+  
+    return () => {
+      map.remove();
+    };
+  }, []);
+  
+
   return (
     <div style={styles.container}>
       <div style={styles.menu}>
         <ul style={styles.menuList}>
           <li
-            style={hoveredItem === 0 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 0
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/dashboard")}
             onMouseEnter={() => handleMenuItemHover(0)}
             onMouseLeave={handleMenuItemLeave}
@@ -64,7 +98,11 @@ const Customer = () => {
             Dashboard
           </li>
           <li
-            style={hoveredItem === 1 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 1
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/analytics")}
             onMouseEnter={() => handleMenuItemHover(1)}
             onMouseLeave={handleMenuItemLeave}
@@ -72,7 +110,11 @@ const Customer = () => {
             Analytics
           </li>
           <li
-            style={hoveredItem === 2 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 2
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/advertising")}
             onMouseEnter={() => handleMenuItemHover(2)}
             onMouseLeave={handleMenuItemLeave}
@@ -80,7 +122,11 @@ const Customer = () => {
             Advertising Performances
           </li>
           <li
-            style={hoveredItem === 3 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 3
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/sales-history")}
             onMouseEnter={() => handleMenuItemHover(3)}
             onMouseLeave={handleMenuItemLeave}
@@ -88,7 +134,11 @@ const Customer = () => {
             Sales history
           </li>
           <li
-            style={hoveredItem === 4 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 4
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/customer-segmentation")}
             onMouseEnter={() => handleMenuItemHover(4)}
             onMouseLeave={handleMenuItemLeave}
@@ -96,7 +146,11 @@ const Customer = () => {
             Customer segmentation
           </li>
           <li
-            style={hoveredItem === 5 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 5
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/competitor-analysis")}
             onMouseEnter={() => handleMenuItemHover(5)}
             onMouseLeave={handleMenuItemLeave}
@@ -104,7 +158,11 @@ const Customer = () => {
             Competitor analysis
           </li>
           <li
-            style={hoveredItem === 6 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 6
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/customer-feedback")}
             onMouseEnter={() => handleMenuItemHover(6)}
             onMouseLeave={handleMenuItemLeave}
@@ -112,7 +170,11 @@ const Customer = () => {
             Customer Feedback
           </li>
           <li
-            style={hoveredItem === 7 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 7
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/settings")}
             onMouseEnter={() => handleMenuItemHover(7)}
             onMouseLeave={handleMenuItemLeave}
@@ -120,7 +182,11 @@ const Customer = () => {
             Settings
           </li>
           <li
-            style={hoveredItem === 8 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 8
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/alerts")}
             onMouseEnter={() => handleMenuItemHover(8)}
             onMouseLeave={handleMenuItemLeave}
@@ -128,7 +194,11 @@ const Customer = () => {
             Alerts
           </li>
           <li
-            style={hoveredItem === 9 ? { ...styles.menuItem, backgroundColor: "black" } : styles.menuItem}
+            style={
+              hoveredItem === 9
+                ? { ...styles.menuItem, backgroundColor: "black" }
+                : styles.menuItem
+            }
             onClick={() => handleMenuItemClick("/admin")}
             onMouseEnter={() => handleMenuItemHover(9)}
             onMouseLeave={handleMenuItemLeave}
@@ -139,11 +209,17 @@ const Customer = () => {
       </div>
 
       <div style={styles.content}>
+        <div id="map" style={styles.map}></div>
+
         {user && (
           <div style={styles.userContainer}>
             <div style={styles.userInfoContainer}>
               <div style={styles.userImageContainer}>
-                <img src={user.picture} alt={user.name} style={styles.userImage} />
+                <img
+                  src={user.picture}
+                  alt={user.name}
+                  style={styles.userImage}
+                />
               </div>
               <div style={styles.userInfo}>
                 <p style={styles.userName}>{user.name}</p>
@@ -239,6 +315,11 @@ const styles = {
     color: "#fff",
     fontSize: "24px",
     marginTop: "10px",
+  },
+  map: {
+    width: "100%",
+    height: "100%",
+    zIndex: 0,
   },
 };
 

@@ -44,7 +44,6 @@ const Settings = () => {
         const keys = response.data.keys;
 
         if (generatedKey && !keys.includes(generatedKey)) {
-          // Key is not valid, set validKey to false
           setValidKey(false);
         }
       } catch (error) {
