@@ -1,17 +1,14 @@
 {
   "files": {
-    "main.css": "/marketing_dashboard/static/css/main.ba3eb3f0.css",
-    "main.js": "/marketing_dashboard/static/js/main.d89818b4.js",
-    "static/js/787.e94e3ee8.chunk.js": "/marketing_dashboard/static/js/787.e94e3ee8.chunk.js",
+    "main.css": "/marketing_dashboard/static/css/main.ce78d6ac.css",
+    "main.js": "/marketing_dashboard/static/js/main.ea969b19.js",
+    "static/js/27.6921987e.chunk.js": "/marketing_dashboard/static/js/27.6921987e.chunk.js",
     "static/media/sparkles_night.jpg": "/marketing_dashboard/static/media/sparkles_night.e543b3003ddb4a690a91.jpg",
     "static/media/google.png": "/marketing_dashboard/static/media/google.3ac8bb5608a106bb6308.png",
-    "index.html": "/marketing_dashboard/index.html",
-    "main.ba3eb3f0.css.map": "/marketing_dashboard/static/css/main.ba3eb3f0.css.map",
-    "main.d89818b4.js.map": "/marketing_dashboard/static/js/main.d89818b4.js.map",
-    "787.e94e3ee8.chunk.js.map": "/marketing_dashboard/static/js/787.e94e3ee8.chunk.js.map"
+    "index.html": "/marketing_dashboard/index.html"
   },
   "entrypoints": [
-    "static/css/main.ba3eb3f0.css",
-    "static/js/main.d89818b4.js"
+    "static/css/main.ce78d6ac.css",
+    "static/js/main.ea969b19.js"
   ]
 }
